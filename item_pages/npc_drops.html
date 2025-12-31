@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="../static/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/favicon/favicon-16x16.png">
+    <title>The Galleon</title>
+    <script src="../main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body class="font-serif flex justify-center items-center flex-col gap-5 w-full p-5 bg-blue-300">
+    <div class="paper self-start p-4!">
+        <div class="flex items-center">
+            <div>
+                <h2 class="text-3xl text-center text-orange-400 text-shadow-md text-shadow-orange-900">The Galleon</h2>
+                <h3 class="text-lg text-center text-yellow-500 text-shadow-md text-shadow-yellow-300">NPC Drops</h3>
+            </div>
+            <p class="mx-5 text-3xl text-orange-400">-</p>
+            <p class="text-2xl hover:underline text-slate-800"><a href="../index.html">Go Back</a></p>
+        </div>
+        <div class="paper grid grid-cols-7 gap-4 items-center">
+            <p class="text-md text-center text-pink-500 text-shadow-md text-shadow-pink-300"><a href="seasonals.html">Seasonals</a></p>
+            <p class="text-md text-center text-blue-500 text-shadow-md text-shadow-blue-300"><a href="rare_items.html">Rare Items</a></p>
+            <p class="text-md text-center text-purple-500 text-shadow-md text-shadow-purple-300"><a href="scrolls.html">Scrolls</a></p>
+            <p class="text-md text-center text-yellow-500 text-shadow-md text-shadow-yellow-300"><a href="npc_drops.html">NPC Drops</a></p>
+            <p class="text-md text-center text-orange-500 text-shadow-md text-shadow-orange-300"><a href="ingredients.html">Ingredients</a></p>
+            <p class="text-md text-center text-red-500 text-shadow-md text-shadow-red-300"><a href="modified_items.html">Modified Items</a></p>
+            <p class="text-md text-center text-green-500 text-shadow-md text-shadow-green-300"><a href="miscellaneous.html">Miscellaneous</a></p>
+        </div>
+    </div>
+    <div class="paper flex-1 w-full flex flex-col gap-6">
+        <input class="border-2 border-orange-300 rounded w-1/4 p-3" type="text" id="search" placeholder="Search item..."/>
+        <div class="overflow-x-auto w-full -mx-4 px-4">
+            <table class="min-w-[980px] w-full table-auto border-collapse bg-orange-300">
+                <thead>
+                    <tr class="border-t border-b border-slate-200">
+                        <th class="p-3"></th>
+                        <th class="p-3 text-left">Item</th>
+                        <th class="p-3 text-center">Value</th>
+                        <th class="p-3 text-center">Death Crow</th>
+                        <th class="p-3 text-center">Demand</th>
+                        <th class="p-3 text-center">Value Editor's Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-white">
+                        <td colspan="6" class="text-4xl text-center p-4">Loading items, please wait...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <svg class="pointer-events-none hidden">
+        <filter id="wavy">
+            <feTurbulence x="0" y="0" baseFrequency="0.02" numOctaves="3" seed="7" />
+            <feDisplacementMap in="SourceGraphic" scale="10" />
+        </filter>
+    </svg>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        const items = await loadSheet(NPC_DROPS_GID, mapItemRow);
+        const configs = await loadKeyValueSheet(CONFIG_GID);
+        renderTable(items, configs.death_crow_base_value);
+        
+        const searchInput = document.querySelector("#search");
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value.toLowerCase();
+
+            const filtered = items.filter(item =>
+                item.name.toLowerCase().includes(query) ||
+                item.description.toLowerCase().includes(query)
+            );
+
+            renderTable(filtered, configs.death_crow_base_value);
+        });
+    });
+</script>
+</html>

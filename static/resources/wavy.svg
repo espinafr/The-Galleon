@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <filter>
+        <feTurbulence
+            x="0"
+            y="0"
+            baseFrequency="0.02"
+            numOctaves="3"
+            seed="7" />
+        <feDisplacementMap in="SourceGraphic" scale="10" />
+    </filter>
+</svg>

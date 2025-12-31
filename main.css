@@ -1,0 +1,37 @@
+/* include padding/border in element width calculations to avoid overflow */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-serif);
+    min-height: 100vh;
+
+    background-color: #2771aaff;
+    background-image: url("static/resources/sea.svg");
+    background-size: 100vw 100vh;
+    background-attachment: fixed;
+}
+
+.paper {
+    line-height: 1;
+    padding: 2%;
+    border-radius: 6px;
+    position: relative;
+}
+
+.paper > * {
+    position: relative;
+    z-index: 2;
+}
+
+.paper:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-shadow: 0 0 30px #8a4d0f inset;
+    background: #fffef0 url("static/resources/noise.svg");
+    filter: url("#wavy") drop-shadow(3px 5px 5px rgba(00, 0, 0, 0.8));
+    z-index: 1;
+}
