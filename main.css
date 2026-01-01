@@ -12,6 +12,7 @@ body {
     background-image: url("static/resources/sea.svg");
     background-size: 100vw 100vh;
     background-attachment: fixed;
+    background-repeat: repeat;
 }
 
 .paper {
