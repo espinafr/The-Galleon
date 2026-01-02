@@ -58,7 +58,7 @@ function addDemand(demand) {
     return `<span style="color: ${colors[demand-1]};">${"★".repeat(demand)}${"☆".repeat(5-demand)}</span>`;
 }
 
-function renderTable(items, death_crow_base_value) {
+function renderTable(items, death_crown_base_value) {
   const tbody = document.querySelector("tbody");
   tbody.innerHTML = "";
 
