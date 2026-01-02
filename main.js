@@ -1,12 +1,12 @@
 const SPREADSHEET_ID = "1h1vPm6fOUxieO5uhXg3oGxNqT2ISKsu7_tmzfFNb8To";
 const CONFIG_GID = 1583366169;
 const SEASONALS_GID = 0;
-const RARE_ITEMS_GID = 0;
-const MISCELLANEOUS_GID = 0;
-const NPC_DROPS_GID = 0;
-const MODIFIED_ITEMS_GID = 0;
-const INGREDIENTS_GID = 0;
-const SCROLLS_GID = 0;
+const RARE_ITEMS_GID = 1442647108;
+const SCROLLS_GID = 1428613482;
+const NPC_DROPS_GID = 349543872;
+const INGREDIENTS_GID = 573269167;
+const MODIFIED_ITEMS_GID = 1628198663;
+const MISCELLANEOUS_GID = 550507433;
 
 function sheetUrl(gid) {
   return `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?gid=${gid}&tqx=out:json`;
@@ -49,7 +49,7 @@ function mapItemRow(row) {
     description: row.c[3]?.v ?? "",
     value: row.c[4]?.v ?? 0,
     demand: row.c[5]?.v ?? 0,
-    notes: row.c[6]?.v ?? 0
+    notes: row.c[6]?.v ?? ""
   };
 }
 
@@ -74,8 +74,8 @@ function renderTable(items, death_crow_base_value) {
             <div class="font-bold text-slate-900">${item.name}</div>
             <div class="text-sm text-slate-600">${item.description}</div>
         </td>
-        <td class="p-3 text-center font-semibold text-slate-900">${item.value}</td>
-        <td class="p-3 text-center text-slate-700">${parseFloat((item.value/death_crow_base_value).toFixed(2))}</td>
+        <td class="p-3 text-center font-semibold text-slate-900">${item.value.toLocaleString()}</td>
+        <td class="p-3 text-center text-slate-700">${parseFloat((item.value/death_crow_base_value).toFixed(2)).toLocaleString()}</td>
         <td class="p-3 text-center text-amber-500">${addDemand(item.demand)}</td>
         <td class="p-3 text-center text-slate-600">${item.notes}</td>
     `;
