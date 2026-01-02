@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="../static/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../static/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../static/favicon/favicon-16x16.png">
-    <title>Ingredients - The Galleon</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicon/favicon-16x16.png">
+    <title>Rare Items - The Galleon</title>
     <meta name="description" content="(THIS WEBSITE IS JUST A TEST PROJECT AND NOT ENDORSED NOR APPROVED BY THE GALLEON STAFF) The Value List is an unofficial project that is produced by The Galleon, it contains the values of every valuable in Arcane Odyssey!">
     <meta property="og:description" content="(THIS WEBSITE IS JUST A TEST PROJECT AND NOT ENDORSED NOR APPROVED BY THE GALLEON STAFF) The Value List is an unofficial project that is produced by The Galleon, it contains the values of every valuable in Arcane Odyssey!">
     <meta name="twitter:description" content="(THIS WEBSITE IS JUST A TEST PROJECT AND NOT ENDORSED NOR APPROVED BY THE GALLEON STAFF) The Value List is an unofficial project that is produced by The Galleon, it contains the values of every valuable in Arcane Odyssey!">
     <meta property="og:image"  content="https://espinafr.github.io/The-Galleon/static/images/banner.png">
     <meta name="twitter:image" content="https://espinafr.github.io/The-Galleon/static/images/banner.png">
-    <script src="../main.js"></script>
-    <link rel="stylesheet" href="../main.css">
+    <script src="../../main.js"></script>
+    <link rel="stylesheet" href="../../main.css">
 </head>
 <body class="font-serif flex justify-center items-center flex-col gap-5 w-full p-5 bg-blue-300">
     <div class="paper self-start p-4!">
         <div class="flex items-center">
             <div>
                 <h2 class="text-3xl text-center text-orange-400 text-shadow-md text-shadow-orange-900">The Galleon</h2>
-                <h3 class="text-lg text-center text-orange-500 text-shadow-md text-shadow-orange-300">Ingredients</h3>
+                <h3 class="text-lg text-center text-blue-500 text-shadow-md text-shadow-blue-300">Rare Items</h3>
             </div>
             <p class="mx-5 text-3xl text-orange-400">-</p>
-            <p class="text-2xl hover:underline text-slate-800"><a href="../index.html">Go Back</a></p>
+            <p class="text-2xl hover:underline text-slate-800"><a href="../../index.html">Go Back</a></p>
         </div>
         <div class="paper grid md:grid-cols-3 lg:grid-cols-7 gap-4 items-center">
             <p class="text-md text-center text-pink-500 text-shadow-md text-shadow-pink-300"><a href="seasonals.html">Seasonals</a></p>
@@ -66,9 +66,10 @@
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', async function() {
-        const items = await loadSheet(INGREDIENTS_GID, mapItemRow);
-        const configs = await loadKeyValueSheet(CONFIG_GID);
-        renderTable(items, configs.death_crown_base_value);
+        const item_type = 'rare_items';
+        const items = await loadSheet(ITEMS_GID[item_type], mapItemRow);
+        const death_crown_base_value = await getConfig('death_crown_base_value');
+        renderTable(items, item_type, death_crown_base_value);
         
         const searchInput = document.querySelector("#search");
         searchInput.addEventListener("input", () => {
@@ -79,7 +80,7 @@
                 item.description.toLowerCase().includes(query)
             );
 
-            renderTable(filtered, configs.death_crown_base_value);
+            renderTable(filtered, item_type, death_crown_base_value);
         });
     });
 </script>
