@@ -6,7 +6,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../static/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../static/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../static/favicon/favicon-16x16.png">
-    <title>Item Details - The Galleon</title>
+    <title>Item Viewer - The Galleon</title>
+    <meta property="og:title" content="Item Viewer - The Galleon">
+    <meta name="twitter:title" content="Item Viewer - The Galleon">
     <meta name="description" content="(THIS WEBSITE IS JUST A TEST PROJECT AND NOT ENDORSED NOR APPROVED BY THE GALLEON STAFF) The Value List is an unofficial project that is produced by The Galleon, it contains the values of every valuable in Arcane Odyssey!">
     <meta property="og:description" content="(THIS WEBSITE IS JUST A TEST PROJECT AND NOT ENDORSED NOR APPROVED BY THE GALLEON STAFF) The Value List is an unofficial project that is produced by The Galleon, it contains the values of every valuable in Arcane Odyssey!">
     <meta name="twitter:description" content="(THIS WEBSITE IS JUST A TEST PROJECT AND NOT ENDORSED NOR APPROVED BY THE GALLEON STAFF) The Value List is an unofficial project that is produced by The Galleon, it contains the values of every valuable in Arcane Odyssey!">
@@ -36,7 +38,43 @@
         </div>
     </div>
     <div class="paper flex-1 flex flex-col md:flex-row items-center lg:justify-center md:w-4/5 gap-6" id="itemContainer">
-        <p class="text-2xl">Loading item, please wait....</p>
+        <div class="text-center">
+            <div class="w-60 h-60 m-5">
+                <img id="image" src="" alt="Loading image" class="w-full h-full">
+            </div>
+            <h2 class="text-2xl text-orange-300 font-bold" id="name">Loading</h2>
+        </div>
+        <div class="text-lg flex flex-col">
+            <div class="flex flex-col lg:grid lg:grid-cols-2 mb-5 gap-5">
+                <div>
+                    <p class="text-orange-300 text-xl font-bold">Description</p>
+                    <p id="description">Loading, please wait...</p>
+                </div>
+                <div>
+                    <p class="text-orange-300 text-xl font-bold">Value Editor's Notes</p>
+                    <p id="editornotes">Loading, please wait...</p>
+                </div>
+            </div>
+            <div class="text-center flex justify-center gap-4">
+                <div>
+                    <p class="text-green-500">Value:</p>
+                    <p id="value"></p>
+                </div>
+                <div>
+                    <p class="text-green-500">Death Crowns:</p>
+                    <p id="deathcrowns"></p>
+                </div>
+                <div>
+                    <p class="text-green-500">Demand:</p>
+                    <p id="demand"></p>
+                </div>
+                <div>
+                    <p class="text-green-500">Value Changes:</p>
+                    <p id="value_changes"></p>
+                </div>
+            </div>
+        </div>
+        <div class="absolute! text-right right-3 bottom-3 cursor-pointer" onclick="copyLink()"><p class="text-3xl hover:text-orange-400 transition-250 transition-colors">→</p></div>
     </div>
     <svg class="pointer-events-none hidden">
         <filter id="wavy">
@@ -46,6 +84,16 @@
     </svg>
 </body>
 <script>
+    function copyLink() {
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(window.location.href)
+                .then(() => alert("Link copied!"))
+                .catch(err => alert("Failed to copy: " + err));
+        } else {
+            alert("Your browser does not support clipboard operations in this context.");
+        }
+    }
+
     function formatValueChange(oldValue, todayValue) {
         if (oldValue === "N/A") {
             return "N/A";
@@ -57,32 +105,17 @@
     }
 
     function renderDetails(item, death_crown_base_value) {
-        document.getElementById("itemContainer").innerHTML = `
-        <div class="text-center">
-            <div class="w-60 h-60 m-5">
-                <img src="${item.image}" alt="${item.name}'s Image" class="w-full h-full">
-            </div>
-            <h2 class="text-2xl text-orange-300 font-bold">${item.name}</h2>
-        </div>
-        <div class="text-lg">
-            <div class="grid grid-cols-2 mb-5 gap-5">
-                <div>
-                    <p class="text-orange-300 text-xl font-bold">Description</p>
-                    <p>${item.description}</p>
-                </div>
-                <div>
-                    <p class="text-orange-300 text-xl font-bold">Value Editor's Notes</p>
-                    <p>${item.notes}</p>
-                </div>
-            </div>
-            <div class="text-center flex justify-center gap-4">
-                <p><span class="text-green-500">Value:</span> ${item.value.toLocaleString()}</p>
-                <p><span class="text-green-500">Death Crowns:</span> ${parseFloat((item.value/death_crown_base_value).toFixed(2)).toLocaleString()}</p>
-                <p><span class="text-green-500">Demand:</span> ${addDemand(item.demand)}</p>
-                <p><span class="text-green-500">Value Changes:</span> ${formatValueChange(item.oldvalue, item.value)}</p>
-            </div>
-        </div>
-        `
+        const imageContainer = document.getElementById("image");
+        imageContainer.src = item.image;
+        imageContainer.alt = `${item.name}'s image`;
+        document.getElementById("name").innerText = item.name;
+        document.getElementById("description").innerText = item.description;
+        document.getElementById("editornotes").innerText = item.notes;
+
+        document.getElementById("value").innerText = item.value.toLocaleString();
+        document.getElementById("deathcrowns").innerText = parseFloat((item.value/death_crown_base_value).toFixed(2)).toLocaleString();
+        document.getElementById("demand").innerHTML = addDemand(item.demand);
+        document.getElementById("value_changes").innerHTML = formatValueChange(item.oldvalue, item.value);
     }
 
     function isIdValid(str) {
