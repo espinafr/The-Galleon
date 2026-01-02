@@ -44,7 +44,7 @@
                         <th class="p-3"></th>
                         <th class="p-3 text-left">Item</th>
                         <th class="p-3 text-center">Value</th>
-                        <th class="p-3 text-center">Death Crow</th>
+                        <th class="p-3 text-center">Death Crown</th>
                         <th class="p-3 text-center">Demand</th>
                         <th class="p-3 text-center">Value Editor's Note</th>
                     </tr>
@@ -68,7 +68,7 @@
     document.addEventListener('DOMContentLoaded', async function() {
         const items = await loadSheet(MISCELLANEOUS_GID, mapItemRow);
         const configs = await loadKeyValueSheet(CONFIG_GID);
-        renderTable(items, configs.death_crow_base_value);
+        renderTable(items, configs.death_crown_base_value);
         
         const searchInput = document.querySelector("#search");
         searchInput.addEventListener("input", () => {
@@ -79,7 +79,7 @@
                 item.description.toLowerCase().includes(query)
             );
 
-            renderTable(filtered, configs.death_crow_base_value);
+            renderTable(filtered, configs.death_crown_base_value);
         });
     });
 </script>
