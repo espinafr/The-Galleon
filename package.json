@@ -1,0 +1,29 @@
+{
+  "name": "the-galleon",
+  "version": "1.0.0",
+  "description": "OBS. This is just a test project and it wasn't endorsed nor approved by the official The Galleon staff.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/espinafr/The-Galleon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/espinafr/The-Galleon/issues"
+  },
+  "homepage": "https://github.com/espinafr/The-Galleon#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.23",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.18"
+  }
+}

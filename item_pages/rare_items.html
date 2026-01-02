@@ -8,7 +8,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../static/favicon/favicon-16x16.png">
     <title>The Galleon</title>
     <script src="../main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="../main.css">
 </head>
 <body class="font-serif flex justify-center items-center flex-col gap-5 w-full p-5 bg-blue-300">
@@ -21,7 +20,7 @@
             <p class="mx-5 text-3xl text-orange-400">-</p>
             <p class="text-2xl hover:underline text-slate-800"><a href="../index.html">Go Back</a></p>
         </div>
-        <div class="paper grid grid-cols-7 gap-4 items-center">
+        <div class="paper grid md:grid-cols-3 lg:grid-cols-7 gap-4 items-center">
             <p class="text-md text-center text-pink-500 text-shadow-md text-shadow-pink-300"><a href="seasonals.html">Seasonals</a></p>
             <p class="text-md text-center text-blue-500 text-shadow-md text-shadow-blue-300"><a href="rare_items.html">Rare Items</a></p>
             <p class="text-md text-center text-purple-500 text-shadow-md text-shadow-purple-300"><a href="scrolls.html">Scrolls</a></p>
@@ -32,7 +31,7 @@
         </div>
     </div>
     <div class="paper flex-1 w-full flex flex-col gap-6">
-        <input class="border-2 border-orange-300 rounded w-1/4 p-3" type="text" id="search" placeholder="Search item..."/>
+        <input class="border-2 border-orange-300 rounded w-full md:w-1/4 p-3" type="text" id="search" placeholder="Search item..."/>
         <div class="overflow-x-auto w-full -mx-4 px-4">
             <table class="min-w-[980px] w-full table-auto border-collapse bg-orange-300">
                 <thead>
