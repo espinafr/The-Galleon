@@ -75,7 +75,7 @@ function renderTable(items, death_crow_base_value) {
             <div class="text-sm text-slate-600">${item.description}</div>
         </td>
         <td class="p-3 text-center font-semibold text-slate-900">${item.value.toLocaleString()}</td>
-        <td class="p-3 text-center text-slate-700">${parseFloat((item.value/death_crow_base_value).toFixed(2)).toLocaleString()}</td>
+        <td class="p-3 text-center text-slate-700">${parseFloat((item.value/death_crown_base_value).toFixed(2)).toLocaleString()}</td>
         <td class="p-3 text-center text-amber-500">${addDemand(item.demand)}</td>
         <td class="p-3 text-center text-slate-600">${item.notes}</td>
     `;
